@@ -64,7 +64,7 @@ data <- data[,c(69,2:68)]
 
 ## STEP 4: Descriptive variable names
 variablesnames <- function(x){
-  t<-paste(x[2],x[1],sep="")
+  t<-paste(x[1],x[2],sep="")
   if(!is.na(x[3])){
     t<-paste(t,x[3],sep="")
   }
@@ -81,4 +81,5 @@ rm(splitfeaturesnames,newfeaturesnames,variablesnames)
 ## for each activity and each subject
 new_data <- aggregate(data[3:68], by=list(data$activity,data$subjectid), FUN=mean)
 names(new_data)[1:2] <- names(data)[1:2]
+names(new_data)[3:68] <- paste("avg",names(new_data)[3:68],sep="")
 write.table(new_data,file="TidyData.txt",row.names=FALSE)
